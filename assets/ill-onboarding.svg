@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225" fill="none" aria-hidden="true">
+  <rect width="400" height="225" fill="#0e3024"/>
+  <rect x="40" y="100" width="72" height="40" rx="6" stroke="#2d6b52" stroke-width="1" fill="#1a523f"/>
+  <rect x="164" y="100" width="72" height="40" rx="6" stroke="#22e8a8" stroke-width="1" fill="#1a523f" opacity="0.9"/>
+  <rect x="288" y="100" width="72" height="40" rx="6" stroke="#2d6b52" stroke-width="1" fill="#1a523f"/>
+  <path d="M112 120 H164" stroke="#22e8a8" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <path d="M236 120 H288" stroke="#7aad92" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <circle cx="76" cy="120" r="6" fill="#22e8a8" opacity="0.6"/>
+  <circle cx="200" cy="120" r="6" fill="#22e8a8"/>
+  <circle cx="324" cy="120" r="6" fill="#7aad92" opacity="0.5"/>
+  <text x="76" y="88" text-anchor="middle" fill="#9fd4b8" font-family="system-ui,sans-serif" font-size="11" font-weight="500">Sign</text>
+  <text x="200" y="88" text-anchor="middle" fill="#9fd4b8" font-family="system-ui,sans-serif" font-size="11" font-weight="500">Setup</text>
+  <text x="324" y="88" text-anchor="middle" fill="#9fd4b8" font-family="system-ui,sans-serif" font-size="11" font-weight="500">Live</text>
+</svg>
