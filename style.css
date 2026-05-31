@@ -1126,6 +1126,12 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   padding-bottom: 1.25rem;
 }
 
+.page-hero--short:has(+ .section--contact) .page-hero__inner {
+  max-width: 32rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
 .section--contact {
   padding-top: clamp(1rem, 2vw, 1.5rem);
   padding-bottom: calc(var(--section-y) + 1rem);
