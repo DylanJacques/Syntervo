@@ -31,6 +31,16 @@ start index.html
 
 Push all files to the repo root. Enable Pages on the `main` branch. Site serves `index.html` as the home page.
 
+## Contact form
+
+The site uses [Web3Forms](https://web3forms.com) (FormSubmit was unreliable).
+
+1. Go to [web3forms.com](https://web3forms.com) and create a free access key for `Syntevo@gmail.com`.
+2. Open `contact-config.js` and replace `REPLACE_WITH_YOUR_WEB3FORMS_ACCESS_KEY` with your key.
+3. Redeploy / push to GitHub Pages.
+
+Until the key is set, visitors can still use the mailto link on the contact page.
+
 ## Contact
 
 Email: Syntevo@gmail.com

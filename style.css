@@ -965,6 +965,26 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   opacity: 0.35;
 }
 
+/* Dashboards card — glow toned down 30% vs other service screenshots */
+#dashboards .visual.visual--screenshot {
+  --screenshot-glow: rgba(34, 232, 168, 0.126);
+  --screenshot-glow-sage: rgba(127, 200, 160, 0.14);
+}
+
+#dashboards .visual.visual--screenshot img {
+  box-shadow:
+    0 0 0 1px rgba(34, 232, 168, 0.196),
+    0 0 13px var(--screenshot-glow),
+    0 0 28px rgba(34, 232, 168, 0.063);
+}
+
+#dashboards .visual.visual--screenshot::before {
+  background:
+    radial-gradient(ellipse 65% 55% at 50% 22%, var(--screenshot-glow) 0%, transparent 70%),
+    radial-gradient(circle at 88% 92%, var(--screenshot-glow-sage) 0%, transparent 52%),
+    radial-gradient(ellipse 95% 88% at 50% 50%, transparent 38%, rgba(6, 24, 16, 0.7) 100%);
+}
+
 .card__index {
   display: block;
   font-size: 0.6875rem;
@@ -1159,13 +1179,22 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   margin-bottom: 1.75rem;
 }
 
-.contact__success {
+.contact__success,
+.contact__error {
   text-align: left;
   margin-bottom: 1.5rem;
   padding: 1.25rem 1.35rem;
-  border: 1px solid var(--line-accent);
   border-radius: var(--radius);
+}
+
+.contact__success {
+  border: 1px solid var(--line-accent);
   background: var(--accent-ghost);
+}
+
+.contact__error {
+  border: 1px solid rgba(255, 120, 120, 0.35);
+  background: rgba(255, 80, 80, 0.08);
 }
 
 .contact__success-title {
@@ -1175,10 +1204,23 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   margin-bottom: 0.35rem;
 }
 
-.contact__success-text {
+.contact__success-text,
+.contact__error-text {
   font-size: 0.875rem;
   color: var(--text-secondary);
   line-height: 1.6;
+}
+
+.contact__error-title {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 0.35rem;
+}
+
+.btn--loading {
+  pointer-events: none;
+  opacity: 0.72;
 }
 
 .contact-form {

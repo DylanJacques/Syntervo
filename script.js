@@ -17,20 +17,103 @@
     yearEl.textContent = new Date().getFullYear();
   }
 
-  /* Contact form — success state after FormSubmit redirect */
+  /* Contact form — Web3Forms (FormSubmit was returning 521) */
   const contactForm = document.getElementById('contactForm');
   const contactSuccess = document.getElementById('contactSuccess');
-  const formNext = document.getElementById('formNext');
+  const contactError = document.getElementById('contactError');
+  const contactErrorText = document.getElementById('contactErrorText');
+  const contactSubmit = document.getElementById('contactSubmit');
+  const contactConfig = window.SYNTERVO_CONTACT || {};
+  const PLACEHOLDER_KEY = 'REPLACE_WITH_YOUR_WEB3FORMS_ACCESS_KEY';
 
-  if (formNext) {
-    const nextUrl = new URL('contact.html', window.location.href);
-    nextUrl.searchParams.set('sent', '1');
-    formNext.value = nextUrl.href;
+  function showContactSuccess() {
+    if (!contactForm || !contactSuccess) return;
+    contactForm.hidden = true;
+    if (contactError) contactError.hidden = true;
+    contactSuccess.hidden = false;
+  }
+
+  function showContactError(message) {
+    if (!contactError) return;
+    if (contactErrorText && message) contactErrorText.textContent = message;
+    contactError.hidden = false;
+    if (contactSuccess) contactSuccess.hidden = true;
+  }
+
+  function setContactSubmitting(isSubmitting) {
+    if (!contactSubmit) return;
+    contactSubmit.disabled = isSubmitting;
+    contactSubmit.classList.toggle('btn--loading', isSubmitting);
+    contactSubmit.textContent = isSubmitting ? 'Sending…' : 'Send message';
+  }
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const accessKey = (contactConfig.accessKey || '').trim();
+      if (!accessKey || accessKey === PLACEHOLDER_KEY) {
+        showContactError(
+          'The contact form is not configured yet. Please email us at Syntevo@gmail.com.'
+        );
+        return;
+      }
+
+      const honeypot = contactForm.querySelector('[name="botcheck"]');
+      if (honeypot && honeypot.checked) return;
+
+      const name = contactForm.querySelector('[name="name"]');
+      const email = contactForm.querySelector('[name="email"]');
+      const message = contactForm.querySelector('[name="message"]');
+
+      if (!name || !email || !message) return;
+
+      if (contactError) contactError.hidden = true;
+      setContactSubmitting(true);
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          subject: 'New inquiry from Syntervo website',
+          from_name: 'Syntervo Website',
+          name: name.value.trim(),
+          email: email.value.trim(),
+          message: message.value.trim()
+        })
+      })
+        .then(function (res) {
+          return res.json().then(function (data) {
+            return { ok: res.ok, data: data };
+          });
+        })
+        .then(function (result) {
+          if (result.ok && result.data && result.data.success) {
+            showContactSuccess();
+            contactForm.reset();
+            return;
+          }
+          throw new Error(
+            (result.data && result.data.message) || 'The form service returned an error.'
+          );
+        })
+        .catch(function () {
+          showContactError(
+            'Something went wrong sending your message. Please try again, or email Syntevo@gmail.com directly.'
+          );
+        })
+        .finally(function () {
+          setContactSubmitting(false);
+        });
+    });
   }
 
   if (contactForm && contactSuccess && window.location.search.includes('sent=1')) {
-    contactForm.hidden = true;
-    contactSuccess.hidden = false;
+    showContactSuccess();
     if (history.replaceState) {
       history.replaceState(null, '', window.location.pathname);
     }

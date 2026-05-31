@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Contact Syntervo — book a call to scope dashboards, onboarding, or pipeline automation.">
+  <meta name="description" content="Contact Syntervo to book a call and scope dashboards, onboarding, or pipeline automation.">
   <title>Syntervo | Contact</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -63,20 +63,16 @@
 
           <div class="contact__success" id="contactSuccess" role="status" hidden>
             <p class="contact__success-title">Message sent</p>
-            <p class="contact__success-text">Thanks — we’ll get back to you shortly.</p>
+            <p class="contact__success-text">Thanks. We’ll get back to you shortly.</p>
           </div>
 
-          <form
-            class="contact-form"
-            id="contactForm"
-            action="https://formsubmit.co/Syntevo@gmail.com"
-            method="POST"
-          >
-            <input type="hidden" name="_subject" value="New inquiry — Syntervo website">
-            <input type="hidden" name="_template" value="table">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_next" id="formNext" value="">
-            <input type="text" name="_honey" class="contact-form__honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <div class="contact__error" id="contactError" role="alert" hidden>
+            <p class="contact__error-title">Couldn’t send your message</p>
+            <p class="contact__error-text" id="contactErrorText">Please try again in a moment, or email us directly.</p>
+          </div>
+
+          <form class="contact-form" id="contactForm" action="#" method="post" novalidate>
+            <input type="checkbox" name="botcheck" class="contact-form__honey" tabindex="-1" autocomplete="off" aria-hidden="true">
 
             <div class="form-field">
               <label class="form-label" for="contact-name">Name</label>
@@ -100,14 +96,19 @@
               ></textarea>
             </div>
 
-            <button type="submit" class="btn btn--primary btn--block">Send message</button>
+            <button type="submit" class="btn btn--primary btn--block" id="contactSubmit">Send message</button>
           </form>
+
+          <p class="contact__note">
+            Prefer email?
+            <a class="contact__email-link" href="mailto:Syntevo@gmail.com?subject=Syntervo%20website%20inquiry">Syntevo@gmail.com</a>
+          </p>
         </div>
 
         <div class="contact-info reveal reveal--d1">
           <div class="contact-info__item">
             <h3 class="contact-info__label">What to include</h3>
-            <p>Which area hurts most — reporting, onboarding, or leads — and what tools you use today.</p>
+            <p>Which area hurts most (reporting, onboarding, or leads) and what tools you use today.</p>
           </div>
           <div class="contact-info__item">
             <h3 class="contact-info__label">What happens next</h3>
@@ -136,6 +137,7 @@
     </div>
   </footer>
 
+  <script src="contact-config.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
